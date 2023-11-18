@@ -222,12 +222,12 @@ class Counter(dict):
     all keys are defaulted to have value 0.  Using a dictionary:
 
     a = {}
-    print a['test']
+    print(a['test'])
 
     would give an error, while the Counter class analogue:
 
     >>> a = Counter()
-    >>> print a['test']
+    >>> print(a['test'])
     0
 
     returns the default 0 value. Note that to reference a key
@@ -236,14 +236,14 @@ class Counter(dict):
 
     >>> a = Counter()
     >>> a['test'] = 2
-    >>> print a['test']
+    >>> print(a['test'])
     2
 
     This is very useful for counting things without initializing their counts,
     see for example:
 
     >>> a['blah'] += 1
-    >>> print a['blah']
+    >>> print(a['blah'])
     1
 
     The counter also includes additional functionality useful in implementing
@@ -291,10 +291,11 @@ class Counter(dict):
         >>> a.sortedKeys()
         ['second', 'third', 'first']
         """
-        sortedItems = self.items()
-        compare = lambda x, y:  sign(y[1] - x[1])
-        sortedItems.sort(cmp=compare)
-        return [x[0] for x in sortedItems]
+        # sortedItems = self.items()
+        # compare = lambda x, y:  sign(y[1] - x[1])
+        # sortedItems.sort(cmp=compare)
+        # return [x[0] for x in sortedItems]
+        return sorted(self, key=lambda k: self[k], reverse=True)
 
     def totalCount(self):
         """
