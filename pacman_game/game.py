@@ -528,6 +528,7 @@ class Game:
         self.totalAgentTimes = [0 for agent in agents]
         self.totalAgentTimeWarnings = [0 for agent in agents]
         self.agentTimeout = False
+        self.gameQuit = False
         try:
             import cStringIO
             self.agentOutput = [cStringIO.StringIO() for agent in agents]
