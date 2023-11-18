@@ -31,12 +31,12 @@ docker run \
     -e QT_X11_NO_MITSHM=1 \
     -e XAUTHORITY=$XAUTH \
     -v "$XAUTH:$XAUTH" \
-    -v "/home/$USER/oop-python-nycu:/home/arg/oop-python-nycu" \
+    -v "/home/$USER/oop-proj-bt-pacman:/home/arg/oop-proj-bt-pacman" \
     -v "/tmp/.X11-unix:/tmp/.X11-unix" \
     -v "/etc/localtime:/etc/localtime:ro" \
     -v "/dev:/dev" \
     -v "/var/run/docker.sock:/var/run/docker.sock" \
-    -w "/home/arg/oop-python-nycu" \
+    -w "/home/arg/oop-proj-bt-pacman" \
     --user "root:root" \
     --network host \
     --privileged \
