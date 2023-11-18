@@ -117,7 +117,17 @@ class FixedRandom:
 """
 
 class Stack:
-    "A container with a last-in-first-out (LIFO) queuing policy."
+    """
+    A container with a last-in-first-out (LIFO) queuing policy.
+    
+    >>> s = Stack()
+    >>> s.push('A')
+    >>> s.push('B')
+    >>> s.push('C')
+    >>> print(s.pop())
+    C
+
+    """
     def __init__(self):
         self.list = []
 
@@ -134,7 +144,18 @@ class Stack:
         return len(self.list) == 0
 
 class Queue:
-    "A container with a first-in-first-out (FIFO) queuing policy."
+    """
+    A container with a first-in-first-out (FIFO) queuing policy.
+
+    >>> q = Queue()
+    >>> q.push('A')
+    >>> q.push('B')
+    >>> q.push('C')
+    >>> print(q.pop())
+    A
+    >>> print(q.pop())
+    B
+    """
     def __init__(self):
         self.list = []
 
@@ -163,6 +184,13 @@ class PriorityQueue:
       Note that this PriorityQueue does not allow you to change the priority
       of an item.  However, you may insert the same item multiple times with
       different priorities.
+
+      >>> q = PriorityQueue()
+      >>> q.push('A', 5)
+      >>> q.push('B', 1)
+      >>> q.push('C', 10)
+      >>> print(q.pop())
+      B
     """
     def  __init__(self):
         self.heap = []
@@ -190,6 +218,27 @@ class PriorityQueueWithFunction(PriorityQueue):
     Queue and the Stack classes. This is designed for drop-in replacement for
     those two classes. The caller has to provide a priority function, which
     extracts each item's priority.
+
+    >>> q = PriorityQueueWithFunction(lambda x: x)
+    >>> q.push('B')
+    >>> q.push('A')
+    >>> q.push('C')
+    >>> print(q.pop())
+    A
+    
+    >>> q = PriorityQueueWithFunction(lambda x: -x)
+    >>> q.push(2)
+    >>> q.push(3)
+    >>> q.push(1)
+    >>> print(q.pop())
+    3
+
+    >>> q = PriorityQueueWithFunction(lambda x: x[0])
+    >>> q.push((1, 'A'))
+    >>> q.push((2, 'B'))
+    >>> q.push((0, 'C'))
+    >>> print(q.pop())
+    (0, 'C')
     """
     def  __init__(self, priorityFunction):
         "priorityFunction (item) -> priority"
