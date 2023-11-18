@@ -1,3 +1,28 @@
+# oop-proj-bt-pacman
+
+This repo is used for OOP class. See the original developments further below.
+
+We will use the docker setup in the oop-python-nycu repo.
+
+## How to Run
+
+```
+cd pacman_game
+python3 pacman.py
+```
+    WEST_KEY  = 'a'
+    EAST_KEY  = 'd'
+    NORTH_KEY = 'w'
+    SOUTH_KEY = 's'
+    STOP_KEY = 'q'
+
+Run with debugger
+```
+python3 -m ipdb pacman.py
+```
+
+---
+
 Installation in Windows
 ------------
 1) Install Dependencies:
