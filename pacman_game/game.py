@@ -20,10 +20,15 @@
 # John DeNero (denero@cs.berkeley.edu) and Dan Klein (klein@cs.berkeley.edu).
 # For more info, see http://inst.eecs.berkeley.edu/~cs188/sp09/pacman.html
 
-from util import *
-import time, os
+import time
+import os
 import traceback
 import sys
+
+from io import StringIO
+
+from util import *
+
 
 #######################
 # Parts worth reading #
@@ -299,6 +304,7 @@ class Actions:
 
     TOLERANCE = .001
 
+    
     def reverseDirection(action):
         if action == Directions.NORTH:
             return Directions.SOUTH
@@ -309,7 +315,7 @@ class Actions:
         if action == Directions.WEST:
             return Directions.EAST
         return action
-    reverseDirection = staticmethod(reverseDirection)
+    # reverseDirection = staticmethod(reverseDirection)
 
     def vectorToDirection(vector):
         dx, dy = vector
@@ -322,12 +328,12 @@ class Actions:
         if dx > 0:
             return Directions.EAST
         return Directions.STOP
-    vectorToDirection = staticmethod(vectorToDirection)
+    # vectorToDirection = staticmethod(vectorToDirection)
 
     def directionToVector(direction, speed = 1.0):
         dx, dy =  Actions._directions[direction]
         return (dx * speed, dy * speed)
-    directionToVector = staticmethod(directionToVector)
+    # directionToVector = staticmethod(directionToVector)
 
     def getPossibleActions(config, walls):
         possible = []
@@ -346,7 +352,7 @@ class Actions:
 
         return possible
 
-    getPossibleActions = staticmethod(getPossibleActions)
+    # getPossibleActions = staticmethod(getPossibleActions)
 
     def getLegalNeighbors(position, walls):
         x,y = position
@@ -360,13 +366,13 @@ class Actions:
             if next_y < 0 or next_y == walls.height: continue
             if not walls[next_x][next_y]: neighbors.append((next_x, next_y))
         return neighbors
-    getLegalNeighbors = staticmethod(getLegalNeighbors)
+    # getLegalNeighbors = staticmethod(getLegalNeighbors)
 
     def getSuccessor(position, action):
         dx, dy = Actions.directionToVector(action)
         x, y = position
         return (x + dx, y + dy)
-    getSuccessor = staticmethod(getSuccessor)
+    # getSuccessor = staticmethod(getSuccessor)
 
 class GameStateData:
     """
@@ -504,11 +510,11 @@ class GameStateData:
             self.agentStates.append( AgentState( Configuration( pos, Directions.STOP), isPacman) )
         self._eaten = [False for a in self.agentStates]
 
-try:
-    import boinc
-    _BOINC_ENABLED = True
-except:
-    _BOINC_ENABLED = False
+# try:
+#     import boinc
+#     _BOINC_ENABLED = True
+# except:
+_BOINC_ENABLED = False
 
 class Game:
     """
@@ -529,12 +535,11 @@ class Game:
         self.totalAgentTimeWarnings = [0 for agent in agents]
         self.agentTimeout = False
         self.gameQuit = False
-        try:
-            import cStringIO
-            self.agentOutput = [cStringIO.StringIO() for agent in agents]
-        except:
-            from io import StringIO
-            self.agentOutput = [StringIO() for agent in agents]
+        # try:
+            # import cStringIO
+            # self.agentOutput = [cStringIO.StringIO() for agent in agents]
+        # except:
+        self.agentOutput = [StringIO() for agent in agents]
 
 
     def getProgress(self):
@@ -556,7 +561,7 @@ class Game:
     def mute(self, agentIndex):
         if not self.muteAgents: return
         global OLD_STDOUT, OLD_STDERR
-        import cStringIO
+        # import cStringIO
         OLD_STDOUT = sys.stdout
         OLD_STDERR = sys.stderr
         sys.stdout = self.agentOutput[agentIndex]

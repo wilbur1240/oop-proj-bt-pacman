@@ -36,7 +36,7 @@ code to run a game.  This file is divided into three sections:
           linking in all the external parts (agent functions, graphics).
           Check this section out to see all the options available to you.
 
-To play your first game, type 'python pacman.py' from the command line.
+To play your first game, type 'python3 pacman.py' from the command line.
 The keys are 'a', 's', 'd', and 'w' to move (or arrow keys).  Have fun!
 """
 
