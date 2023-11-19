@@ -251,7 +251,14 @@ class PriorityQueueWithFunction(PriorityQueue):
 
 
 def manhattanDistance( xy1, xy2 ):
-    "Returns the Manhattan distance between points xy1 and xy2"
+    """
+    Returns the Manhattan distance between points xy1 and xy2
+
+    >>> manhattanDistance( (1,1), (2,2) )
+    2
+    >>> manhattanDistance( (1,1), (5,5) )
+    8
+    """
     return abs( xy1[0] - xy2[0] ) + abs( xy1[1] - xy2[1] )
 
 """
@@ -563,6 +570,11 @@ def chooseFromDistribution( distribution ):
 def nearestPoint( pos ):
     """
     Finds the nearest grid point to a position (discretizes).
+
+    >>> nearestPoint((0.2, 0.2))
+    (0, 0)
+    >>> nearestPoint((0.9, 0.9))
+    (1, 1)
     """
     ( current_row, current_col ) = pos
 
