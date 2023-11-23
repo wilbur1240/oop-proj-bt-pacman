@@ -3,10 +3,13 @@ from std_msgs.msg import Float32MultiArray
 import numpy as np
 
 
+PUBLISH_RATE = 100
+SUBSCRIBE_RATE = 10
+
 class AgentPose_pub():
 
     scale_pose = []
-    last_pose = [0., 0.]
+    last_pose = np.array([0., 0.])
 
     def __init__(self, topic_pub = 'scale_pose', 
                  topic_sub = 'AgentPose', pub_rate = 100, sub_rate = 10):
@@ -24,24 +27,29 @@ class AgentPose_pub():
         self.pub.publish(Float32MultiArray(data=data))
 
     def callback(self, data):
-        diff = data.data - self.last_pose
-        for i in range(self.pub_rate/self.sub_rate):
-            self.scale_pose.append(self.last_pose + diff * i / (self.pub_rate/self.sub_rate))
-        last_pose = data.data
+        x, y = data.data
+        pose = np.array([x, y])
+        if self.last_pose[0] != pose[0] and self.last_pose[1] != pose[1]:
+            diff = pose - np.array(self.last_pose)
+            # print(diff)
+            for i in range(int(self.pub_rate/self.sub_rate)):
+                tmp = self.last_pose + diff * i / int(self.pub_rate/self.sub_rate)
+                self.scale_pose.append([tmp[0], tmp[1]])
+            self.last_pose = np.array([x, y])
 
 class pacman_pub(AgentPose_pub):
     def __init__(self, topic_pub = 'pacman_scale_pose', 
-                 topic_sub = 'pacman_pose', pub_rate = 100, sub_rate = 10):
+                 topic_sub = 'pacman_pose', pub_rate = PUBLISH_RATE, sub_rate = SUBSCRIBE_RATE):
         super(pacman_pub, self).__init__(topic_pub, topic_sub, pub_rate, sub_rate)
 
 class ghost1_pub(AgentPose_pub):
     def __init__(self, topic_pub = 'ghost1_scale_pose', 
-                 topic_sub = 'ghost_blue_pose', pub_rate = 100, sub_rate = 10):
+                 topic_sub = 'ghost_blue_pose', pub_rate = PUBLISH_RATE, sub_rate = SUBSCRIBE_RATE):
         super(ghost1_pub, self).__init__(topic_pub, topic_sub, pub_rate, sub_rate)
 
 class ghost2_pub(AgentPose_pub):
     def __init__(self, topic_pub = 'ghost2_scale_pose', 
-                 topic_sub = 'ghost_orange_pose', pub_rate = 100, sub_rate = 10):
+                 topic_sub = 'ghost_orange_pose', pub_rate = PUBLISH_RATE, sub_rate = SUBSCRIBE_RATE):
         super(ghost2_pub, self).__init__(topic_pub, topic_sub, pub_rate, sub_rate)
 
 
@@ -53,7 +61,7 @@ ghost2 = ghost2_pub()
 
 def main():
     rospy.init_node('Agent_scale_pose', anonymous=True)
-    r = rospy.Rate(100) # 10hz 
+    r = rospy.Rate(PUBLISH_RATE) # 10hz 
     while not rospy.is_shutdown():
         pacman.publish()
         ghost1.publish()
