@@ -17,6 +17,12 @@ import math, time
 from game import Directions
 
 ###########################
+#  Agent Pose Publisher   #
+###########################
+import rospy
+from geometry_msgs.msg import Pose2D
+
+###########################
 #  GRAPHICS DISPLAY CODE  #
 ###########################
 
@@ -161,6 +167,35 @@ class PacmanGraphics:
         self.gridSize = DEFAULT_GRID_SIZE * zoom
         self.capture = capture
         self.frameTime = frameTime
+#================================================================================================
+        self.pose_pub()
+
+#======================================Agents poses publish======================================
+    def printAllPose(self):
+        print("PACMAN: ", self.getPosition(self.agentImages[0][0]))
+        print("GHOST_blue: ", self.getPosition(self.agentImages[1][0]))
+        print("GHOST_orange: ", self.getPosition(self.agentImages[2][0]))
+        pose = Pose2D()
+        pose.x = self.getPosition(self.agentImages[0][0])[0]
+        pose.y = self.getPosition(self.agentImages[0][0])[1]
+        pose.theta = 0
+        self.pacman_pose_pub.publish(pose)
+        pose.x = self.getPosition(self.agentImages[1][0])[0]
+        pose.y = self.getPosition(self.agentImages[1][0])[1]
+        pose.theta = 0
+        self.ghost_blue_pose_pub.publish(pose)
+        pose.x = self.getPosition(self.agentImages[2][0])[0]
+        pose.y = self.getPosition(self.agentImages[2][0])[1]
+        pose.theta = 0
+        self.ghost_orange_pose_pub.publish(pose)
+
+    def pose_pub(self):
+        self.pacman_pose_pub = rospy.Publisher('pacman_pose', Pose2D, queue_size=10)
+        self.ghost_blue_pose_pub = rospy.Publisher('ghost_blue_pose', Pose2D, queue_size=10)
+        self.ghost_orange_pose_pub = rospy.Publisher('ghost_orange_pose', Pose2D, queue_size=10)
+        rospy.init_node('Agent_Pose_pub', anonymous=True)
+        rate = rospy.Rate(10) # 10hz
+#================================================================================================
 
     def checkNullDisplay(self):
         return False
@@ -237,7 +272,7 @@ class PacmanGraphics:
         #return # MICHELE COMMENT TO DISPLAY
         agentIndex = newState._agentMoved
         agentState = newState.agentStates[agentIndex]
-
+        self.printAllPose()
         if self.agentImages[agentIndex][0].isPacman != agentState.isPacman: self.swapImages(agentIndex, agentState)
         prevState, prevImage = self.agentImages[agentIndex]
         if agentState.isPacman:
