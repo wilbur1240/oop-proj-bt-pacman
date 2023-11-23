@@ -20,7 +20,7 @@ from game import Directions
 #  Agent Pose Publisher   #
 ###########################
 import rospy
-from geometry_msgs.msg import Pose2D
+from std_msgs.msg import Float32MultiArray
 
 ###########################
 #  GRAPHICS DISPLAY CODE  #
@@ -172,29 +172,23 @@ class PacmanGraphics:
 
 #======================================Agents poses publish======================================
     def printAllPose(self):
-        print("PACMAN: ", self.getPosition(self.agentImages[0][0]))
-        print("GHOST_blue: ", self.getPosition(self.agentImages[1][0]))
-        print("GHOST_orange: ", self.getPosition(self.agentImages[2][0]))
-        pose = Pose2D()
-        pose.x = self.getPosition(self.agentImages[0][0])[0]
-        pose.y = self.getPosition(self.agentImages[0][0])[1]
-        pose.theta = 0
-        self.pacman_pose_pub.publish(pose)
-        pose.x = self.getPosition(self.agentImages[1][0])[0]
-        pose.y = self.getPosition(self.agentImages[1][0])[1]
-        pose.theta = 0
-        self.ghost_blue_pose_pub.publish(pose)
-        pose.x = self.getPosition(self.agentImages[2][0])[0]
-        pose.y = self.getPosition(self.agentImages[2][0])[1]
-        pose.theta = 0
-        self.ghost_orange_pose_pub.publish(pose)
+        # print("PACMAN: ", self.getPosition(self.agentImages[0][0]))
+        # print("GHOST_blue: ", self.getPosition(self.agentImages[1][0]))
+        # print("GHOST_orange: ", self.getPosition(self.agentImages[2][0]))
+        pose = [self.getPosition(self.agentImages[0][0])[0], self.getPosition(self.agentImages[0][0])[1]]
+        self.pacman_pose_pub.publish(Float32MultiArray(data=pose))
+        pose = [self.getPosition(self.agentImages[1][0])[0], self.getPosition(self.agentImages[1][0])[1]]
+        self.ghost_blue_pose_pub.publish(Float32MultiArray(data=pose))
+        pose = [self.getPosition(self.agentImages[2][0])[0], self.getPosition(self.agentImages[2][0])[1]]
+        self.ghost_orange_pose_pub.publish(Float32MultiArray(data=pose))
 
     def pose_pub(self):
-        self.pacman_pose_pub = rospy.Publisher('pacman_pose', Pose2D, queue_size=10)
-        self.ghost_blue_pose_pub = rospy.Publisher('ghost_blue_pose', Pose2D, queue_size=10)
-        self.ghost_orange_pose_pub = rospy.Publisher('ghost_orange_pose', Pose2D, queue_size=10)
+        self.pacman_pose_pub = rospy.Publisher('pacman_pose', Float32MultiArray, queue_size=10)
+        self.ghost_blue_pose_pub = rospy.Publisher('ghost_blue_pose', Float32MultiArray, queue_size=10)
+        self.ghost_orange_pose_pub = rospy.Publisher('ghost_orange_pose', Float32MultiArray, queue_size=10)
         rospy.init_node('Agent_Pose_pub', anonymous=True)
-        rate = rospy.Rate(10) # 10hz
+        rate = rospy.Rate(10) # 100hz
+
 #================================================================================================
 
     def checkNullDisplay(self):
