@@ -519,10 +519,10 @@ def readCommand( argv ):
     from optparse import OptionParser
     usageStr = """
     USAGE:      python pacman.py <options>
-    EXAMPLES:   (1) python pacman.py
+    EXAMPLES:   (1) python3 pacman.py
                     - starts an interactive game
-                (2) python pacman.py --layout smallClassic --zoom 2
-                OR  python pacman.py -l smallClassic -z 2
+                (2) python3 pacman.py --layout smallClassic --zoom 2
+                OR  python3 pacman.py -l smallClassic -z 2
                     - starts an interactive game on a smaller board, zoomed in
     """
     parser = OptionParser(usageStr)
@@ -857,11 +857,11 @@ if __name__ == '__main__':
     The main function called when pacman.py is run
     from the command line:
 
-    > python pacman.py
+    > python3 pacman.py
 
     See the usage string for more details.
 
-    > python pacman.py --help
+    > python3 pacman.py --help
     """
     args = readCommand( sys.argv[1:] ) # Get game components based on input
     
