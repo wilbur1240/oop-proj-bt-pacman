@@ -1,0 +1,105 @@
+ClassDiagram {
+
+  class Agent {
+    
+  }
+
+  class BTAgent {
+    
+  }
+  
+  class ChasingAgent {
+    
+  }
+  
+  class EscapingAgent {
+    
+  }
+  
+  class GreedyAgent {
+    
+  }
+  
+  class GhostAgent {
+    
+  }  
+
+  class ImperfectGhost {
+    
+  }  
+
+  class RandomGhost {
+    
+  }  
+
+  class DirectionalGhost {
+    
+  }  
+      
+  class ChasingGhost {
+ 
+  }
+      
+  class AgentState {
+ 
+  }
+  
+  class Game {
+
+  }
+
+  class GameState {
+    
+  }
+  
+  class GameStateData {
+
+  }
+
+  class Directions {
+ 
+  }
+  
+  class Grid {
+
+  }
+  
+  class Configuration {
+
+  }
+  
+  class Actions {
+
+  }
+
+  class ClassicGameRules {
+    
+  }
+  
+  class PacmanRules {
+    
+  }
+  
+  class GhostRules {
+    
+  }
+  BTAgent -g-> Agent
+  ChasingAgent -g-> Agent
+  EscapingAgent -g-> Agent
+  GreedyAgent -g-> Agent
+  
+  GhostAgent -g-> Agent
+  RandomGhost -g-> GhostAgent
+  DirectionalGhost -g-> GhostAgent
+  ImperfectGhost -g-> GhostAgent
+  ChasingGhost -g-> GhostAgent
+  
+
+  GameState <-c- GameStateData;
+  GameStateData <-a- AgentState;
+  
+  Game <-a- Agent;
+  
+  AgentState <-c- Configuration
+
+}

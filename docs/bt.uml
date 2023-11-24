@@ -1,0 +1,42 @@
+ClassDiagram {
+  
+  class TreeNode
+  
+  class LeafNode
+  
+  class ConditionNode
+  
+  class ControlNode
+  
+  class FallbackNode
+  
+  class SequenceNode
+  
+  class ActionNode
+  
+  class Escape
+  
+  class Greedy
+  
+  class Chase
+  
+  class KeepDistance
+  
+  class ClosestDotSearch
+  
+  ControlNode -g-> TreeNode
+  LeafNode -g-> TreeNode
+  
+  ActionNode -g-> LeafNode
+  ConditionNode -g-> LeafNode
+  
+  FallbackNode -g-> ControlNode
+  SequenceNode -g-> ControlNode
+  
+  Escape -g-> ActionNode
+  Greedy -g-> ActionNode
+  Chase -g-> ActionNode
+  KeepDistance -g-> ActionNode
+  ClosestDotSearch -g-> ActionNode
+  
+}
