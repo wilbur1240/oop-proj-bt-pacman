@@ -60,8 +60,8 @@ ghost2 = ghost2_pub()
     
 
 def main():
-    rospy.init_node('Agent_scale_pose', anonymous=True)
-    r = rospy.Rate(PUBLISH_RATE) # 10hz 
+    rospy.init_node('Agent_scale_pose', anonymous=False)
+    r = rospy.Rate(PUBLISH_RATE) # 100hz 
     while not rospy.is_shutdown():
         pacman.publish()
         ghost1.publish()

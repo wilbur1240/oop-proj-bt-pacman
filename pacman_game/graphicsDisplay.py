@@ -186,8 +186,8 @@ class PacmanGraphics:
         self.pacman_pose_pub = rospy.Publisher('pacman_pose', Float32MultiArray, queue_size=10)
         self.ghost_blue_pose_pub = rospy.Publisher('ghost_blue_pose', Float32MultiArray, queue_size=10)
         self.ghost_orange_pose_pub = rospy.Publisher('ghost_orange_pose', Float32MultiArray, queue_size=10)
-        rospy.init_node('Agent_Pose_pub', anonymous=True)
-        rate = rospy.Rate(10) # 100hz
+        rospy.init_node('Agent_Pose_pub', anonymous=False)
+        rate = rospy.Rate(10) # 10hz
 
 #================================================================================================
 
