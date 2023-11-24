@@ -64,11 +64,11 @@ make
 ./behavior_tree_editor
 ```
 You'll see... \
-<img src="./images/empty_bt.png" /> \
+<img src="/images/empty_bt.png" /> \
 Load the example Behavior Tree (BT)..\
 Edit the BT as needed.. \
-<img src="./images/example_file.png" /> \
-<img src="./images/example_bt.png" /> \
+<img src="/images/example_file.png" /> \
+<img src="/images/example_bt.png" /> \
 After editing the behavior tree (BT), press the start button to initiate the Pacman game.
 ### Third terminal:
 You can decide whether to run this task or not, as it will publish the continuous positions of three agents.
