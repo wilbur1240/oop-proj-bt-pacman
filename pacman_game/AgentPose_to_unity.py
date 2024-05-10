@@ -28,14 +28,7 @@ class AgentPose_pub():
 
     def callback(self, data):
         x, y = data.data
-        pose = np.array([x, y])
-        if self.last_pose[0] != pose[0] and self.last_pose[1] != pose[1]:
-            diff = pose - np.array(self.last_pose)
-            # print(diff)
-            for i in range(int(self.pub_rate/self.sub_rate)):
-                tmp = self.last_pose + diff * i / int(self.pub_rate/self.sub_rate)
-                self.scale_pose.append([tmp[0], tmp[1]])
-            self.last_pose = np.array([x, y])
+        self.last_pose = np.array([x, y])
 
 
 # ----- You should define the class for each agent in this area ----- #
