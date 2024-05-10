@@ -9,7 +9,7 @@ SUBSCRIBE_RATE = 10
 class AgentPose_pub():
 
     scale_pose = []
-    last_pose = np.array([0., 0.])
+    last_pose = np.array([0, 0])
 
     def __init__(self, topic_pub = 'scale_pose', 
                  topic_sub = 'AgentPose', pub_rate = 100, sub_rate = 10):
