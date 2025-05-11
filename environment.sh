@@ -1,20 +1,27 @@
-#! /bin/bash
+#!/bin/bash
 
-source /opt/ros/noetic/setup.bash
-# source ~//oop-proj-bt-pacman/catkin_ws/devel/setup.bash
+source /opt/ros/humble/setup.bash
+source ./ros2_ws/install/setup.bash  # Uncomment if needed
 
 if [ "$1" ]; then
-	echo "ROS MASTER $1"
-	export ROS_MASTER_URI=http://$1:11311
+    echo "Setting ROS 2 Domain ID to $1"
+    export ROS_DOMAIN_ID=$1
 else
-	echo "ROS MASTER 127.0.0.1"
-	export ROS_MASTER_URI=http://127.0.0.1:11311
+    echo "ROS_DOMAIN_ID not set, using default (0)"
+    export ROS_DOMAIN_ID=0
 fi
 
 if [ "$2" ]; then
-	echo "ROS IP $2"
-	export ROS_IP=$2
+    echo "Setting ROS 2 IP to $2"
+    export ROS_IP=$2
+    export ROS_HOSTNAME=$2
 else
-	echo "ROS_IP 127.0.0.1"
-	export ROS_IP=127.0.0.1
+    echo "ROS_IP not set, using localhost"
+    export ROS_IP=127.0.0.1
+    export ROS_HOSTNAME=localhost
 fi
+
+# Optional: avoid localhost-only communication
+export ROS_LOCALHOST_ONLY=1
+
+echo "ROS 2 environment configured."

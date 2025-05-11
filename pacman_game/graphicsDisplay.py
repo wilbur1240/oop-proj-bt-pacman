@@ -19,7 +19,10 @@ from game import Directions
 ###########################
 #  Agent Pose Publisher   #
 ###########################
-import rospy
+# import rospy
+# from std_msgs.msg import Float32MultiArray
+import rclpy
+from rclpy.node import Node
 from std_msgs.msg import Float32MultiArray
 
 ###########################
@@ -168,6 +171,8 @@ class PacmanGraphics:
         self.capture = capture
         self.frameTime = frameTime
 #================================================================================================
+        rclpy.init()
+        self.node = rclpy.create_node('pacman_ros2_node')
         self.pose_pub()
 
 #======================================Agents poses publish======================================
@@ -181,13 +186,14 @@ class PacmanGraphics:
         self.ghost_blue_pose_pub.publish(Float32MultiArray(data=pose))
         pose = [self.getPosition(self.agentImages[2][0])[0], self.getPosition(self.agentImages[2][0])[1]]
         self.ghost_orange_pose_pub.publish(Float32MultiArray(data=pose))
+        rclpy.spin_once(self.node, timeout_sec=0.0)
 
     def pose_pub(self):
-        self.pacman_pose_pub = rospy.Publisher('pacman_pose', Float32MultiArray, queue_size=10)
-        self.ghost_blue_pose_pub = rospy.Publisher('ghost_blue_pose', Float32MultiArray, queue_size=10)
-        self.ghost_orange_pose_pub = rospy.Publisher('ghost_orange_pose', Float32MultiArray, queue_size=10)
-        rospy.init_node('Agent_Pose_pub', anonymous=False)
-        rate = rospy.Rate(10) # 10hz
+        # Create publishers for each agent
+        self.node = rclpy.create_node('agent_pose_pub')
+        self.pacman_pose_pub = self.node.create_publisher(Float32MultiArray, 'pacman_pose', 10)
+        self.ghost_blue_pose_pub = self.node.create_publisher(Float32MultiArray, 'ghost_blue_pose', 10)
+        self.ghost_orange_pose_pub = self.node.create_publisher(Float32MultiArray, 'ghost_orange_pose', 10)
 
 #================================================================================================
 
