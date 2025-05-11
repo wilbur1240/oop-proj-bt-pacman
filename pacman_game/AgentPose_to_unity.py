@@ -9,7 +9,7 @@ SUBSCRIBE_RATE = 10
 class AgentPose_pub():
 
     scale_pose = []
-    last_pose = np.array([0., 0.])
+    last_pose = np.array([0, 0])
 
     def __init__(self, topic_pub = 'scale_pose', 
                  topic_sub = 'AgentPose', pub_rate = 100, sub_rate = 10):
@@ -28,35 +28,21 @@ class AgentPose_pub():
 
     def callback(self, data):
         x, y = data.data
-        pose = np.array([x, y])
-        if self.last_pose[0] != pose[0] and self.last_pose[1] != pose[1]:
-            diff = pose - np.array(self.last_pose)
-            # print(diff)
-            for i in range(int(self.pub_rate/self.sub_rate)):
-                tmp = self.last_pose + diff * i / int(self.pub_rate/self.sub_rate)
-                self.scale_pose.append([tmp[0], tmp[1]])
-            self.last_pose = np.array([x, y])
-
-class pacman_pub(AgentPose_pub):
-    def __init__(self, topic_pub = 'pacman_scale_pose', 
-                 topic_sub = 'pacman_pose', pub_rate = PUBLISH_RATE, sub_rate = SUBSCRIBE_RATE):
-        super(pacman_pub, self).__init__(topic_pub, topic_sub, pub_rate, sub_rate)
-
-class ghost1_pub(AgentPose_pub):
-    def __init__(self, topic_pub = 'ghost1_scale_pose', 
-                 topic_sub = 'ghost_blue_pose', pub_rate = PUBLISH_RATE, sub_rate = SUBSCRIBE_RATE):
-        super(ghost1_pub, self).__init__(topic_pub, topic_sub, pub_rate, sub_rate)
-
-class ghost2_pub(AgentPose_pub):
-    def __init__(self, topic_pub = 'ghost2_scale_pose', 
-                 topic_sub = 'ghost_orange_pose', pub_rate = PUBLISH_RATE, sub_rate = SUBSCRIBE_RATE):
-        super(ghost2_pub, self).__init__(topic_pub, topic_sub, pub_rate, sub_rate)
+        self.last_pose = np.array([x, y])
 
 
-pacman = pacman_pub()
-ghost1 = ghost1_pub()
-ghost2 = ghost2_pub()
+# ----- You should define the class for each agent in this area ----- #
 
+class pacman_pub():
+
+
+class ghost1_pub():
+
+
+class ghost2_pub():
+
+
+# ----- And don't forget to define variables ----- #
     
 
 def main():
@@ -70,4 +56,7 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+
+# --- Call the main function here --- #
+
+# ----------------------------------- #
