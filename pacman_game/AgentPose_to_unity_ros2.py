@@ -29,16 +29,16 @@ class AgentPosePub:
 
 # ----- You should define the class for each agent in this area ----- #
 
-class Pacman_Pub(AgentPosePub):
+class Pacman_Pub():
 
 
-class Ghost1_Pub(AgentPosePub):
+class Ghost1_Pub():
 
 
-class Ghost2_Pub(AgentPosePub):
+class Ghost2_Pub():
 
 
-# ----- And don't forget to define variables ----- #
+# ----- And don't forget to define class objects ----- #
 
 def main():
     rclpy.init()
